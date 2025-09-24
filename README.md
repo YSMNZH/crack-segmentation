@@ -1,4 +1,4 @@
-# 🕳️ Crack Segmentation with CNNs  
+# 🕳️ Crack Segmentation 
 
 This project implements a **deep learning–based crack segmentation pipeline** for automated infrastructure monitoring. Instead of relying on manual, time-consuming inspections, our approach leverages **Convolutional Neural Networks (CNNs)** to detect and segment cracks in asphalt images at the **pixel level**, producing clear segmentation masks.  
 
