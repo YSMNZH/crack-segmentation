@@ -1,65 +1,62 @@
-🔎 Project Overview
+# 🕳️ Crack Segmentation with CNNs  
 
-This project focuses on crack segmentation using Convolutional Neural Networks (CNNs) for automated infrastructure monitoring. Instead of relying on traditional, time-consuming inspection methods, our approach leverages deep learning to detect and segment cracks in asphalt images at the pixel level. The end goal is to provide a robust, automated pipeline that classifies each pixel as either crack or non-crack and outputs a clear segmentation mask.
+This project implements a **deep learning–based crack segmentation pipeline** for automated infrastructure monitoring. Instead of relying on manual, time-consuming inspections, our approach leverages **Convolutional Neural Networks (CNNs)** to detect and segment cracks in asphalt images at the **pixel level**, producing clear segmentation masks.  
 
-📂 Project Structure
+---
 
-Dataset Preparation
+## 📂 Project Structure  
 
-Collected 40 cracked and 10 undamaged asphalt images.
+### 1. Dataset Preparation  
+- **Images**: 40 cracked + 10 undamaged asphalt images  
+- **Annotation**: Labeled with **Roboflow** (COCO format, polygons → masks)  
+- **Preprocessing**: Resizing, normalization, mask generation  
+- **Splits**:  
+  - 70% → Training  
+  - 15% → Validation  
+  - 15% → Testing  
 
-Annotated images using Roboflow (COCO format, polygons → masks).
+### 2. Model Development  
+- Custom **encoder–decoder CNN** (from scratch, no U-Net or pretrained weights)  
+- Added **Dropout** for regularization  
+- Explored **transfer learning** with **ResNet** and **MobileNetV3 encoders**  
 
-Applied preprocessing: resizing, normalization, mask generation.
+### 3. Training  
+- Framework: **PyTorch**  
+- Custom **DataLoader** for batch processing  
+- Loss Functions:  
+  - **Dice Loss**  
+  - **Binary Cross-Entropy (BCE)**  
+- Optimized for **IoU-aware performance**  
 
-Split dataset: 70% train, 15% validation, 15% test.
+### 4. Evaluation  
+- Metrics:  
+  - Intersection over Union (**IoU**)  
+  - Dice Score  
+  - Precision & Recall  
+- Visualization: Overlay predicted masks on original images  
 
-Model Development
+### 5. Inference Pipeline  
+1. Preprocess raw input  
+2. Predict crack mask  
+3. Post-process + resize mask  
+4. Visualize results  
 
-Implemented a custom encoder-decoder CNN (from scratch, no U-Net or pretrained weights).
+### 6. Data Augmentation  
+- Implemented with **OpenCV** only  
+- Techniques:  
+  - Rotation  
+  - Scaling  
+  - Brightness/contrast adjustments  
+  - Gaussian noise  
+- Expanded dataset **5×** for improved diversity  
 
-Later extended with Dropout for regularization.
+---
 
-Explored transfer learning (e.g., ResNet, MobileNetV3 encoders).
+## 🛠 Tools & Libraries  
+- **Frameworks**: PyTorch  
+- **Annotation**: Roboflow (COCO JSON format)  
+- **Preprocessing & Augmentation**: OpenCV, NumPy  
+- **Metrics**: IoU, Dice Score, Precision, Recall  
 
-Training
-
-Implemented in PyTorch.
-
-Used custom DataLoader for efficient batch processing.
-
-Optimized with IoU-aware loss functions (e.g., Dice loss + BCE).
-
-Evaluation
-
-Evaluated with Intersection over Union (IoU).
-
-Visualized predictions by overlaying masks on original images.
-
-Pipeline
-
-Built an end-to-end inference pipeline:
-
-Preprocess raw input.
-
-Predict crack mask.
-
-Post-process and resize mask.
-
-Visualize results.
-
-Data Augmentation
-
-Applied transformations with OpenCV only (rotation, scaling, brightness/contrast changes, Gaussian noise).
-
-Generated 5x augmented dataset to enhance diversity.
-
-🛠 Tools & Libraries
-
-Frameworks: PyTorch 
-
-Annotation: Roboflow (COCO JSON format)
-
-Preprocessing & Augmentation: OpenCV, NumPy
-
-Evaluation Metrics: IoU, Dice score, precision/recall
+  - DeepLabv3+  
+  - Swin Transformer  
